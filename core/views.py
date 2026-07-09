@@ -60,10 +60,38 @@ def about(request):
 
 
 def contact(request):
+    from django.core.mail import send_mail
+    from django.conf import settings
+    import logging
+
+    logger = logging.getLogger(__name__)
+
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            inquiry = form.save()
+            
+            # Send email notification to the owner
+            subject = f"New Contact Inquiry: {inquiry.subject or 'No Subject'} - {inquiry.name}"
+            email_body = (
+                f"You have received a new inquiry from your website contact form:\n\n"
+                f"Name: {inquiry.name}\n"
+                f"Email: {inquiry.email}\n"
+                f"Phone: {inquiry.phone or 'N/A'}\n"
+                f"Subject: {inquiry.subject or 'N/A'}\n\n"
+                f"Message:\n{inquiry.message}\n"
+            )
+            try:
+                send_mail(
+                    subject=subject,
+                    message=email_body,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[settings.CONTACT_INQUIRY_EMAIL],
+                    fail_silently=False,
+                )
+            except Exception as e:
+                logger.error(f"Failed to send contact inquiry email: {e}")
+
             messages.success(
                 request,
                 "Thank you for reaching out! Your message has been received. "
