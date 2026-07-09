@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="hero" style="background-image: linear-gradient(rgba(15, 61, 36, 0.45), rgba(15, 61, 36, 0.45)), url('{% static "core/images/products-hero-bg.png" %}'); padding: 60px 20px;">
+  <div class="container">
+    <h1>Our Product &amp; Review</h1>
+    <p>Wholesale and retail tea supply, custom blending, and packaging services.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-error{% endif %}" style="margin-bottom: 24px; padding: 12px 20px; border-radius: var(--radius);">
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="container catalog-container">
+    
+    <!-- Left Sidebar -->
+    <aside class="catalog-sidebar">
+      <div class="sidebar-widget">
+        <h3>Featured Products</h3>
+        <ul class="sidebar-featured">
+          {% for fp in featured_products %}
+          <li>
+            <div class="sidebar-fp-item">
+              <div class="fp-icon" style="overflow: hidden; display: flex; align-items: center; justify-content: center; background: transparent;">
+                {% if fp.image %}
+                  <img src="{{ fp.image.url }}" alt="{{ fp.name }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                {% else %}
+                  🍃
+                {% endif %}
+              </div>
+              <div class="fp-info">
+                <a href="{% url 'products' %}#{{ fp.slug }}">{{ fp.name }}</a>
+                <div class="fp-stars">★★★★★</div>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Right Main Content Area -->
+    <div class="catalog-main">
+      <div class="catalog-header">
+        <h2>Our Premium Tea Collection</h2>
+        <div class="sort-dropdown">
+          <label for="sort-select">Sort by:</label>
+          <select id="sort-select" onchange="location = this.value;">
+            <option value="{% url 'products' %}{% if selected_category %}?category={{ selected_category }}{% endif %}" {% if not selected_sort %}selected{% endif %}>Default Sorting</option>
+            <option value="{% url 'products' %}?sort=name{% if selected_category %}&amp;category={{ selected_category }}{% endif %}" {% if selected_sort == 'name' %}selected{% endif %}>Sort by Name</option>
+          </select>
+        </div>
+      </div>
+
+      {% if products %}
+      <div class="catalog-grid">
+        {% for product in products %}
+        <div class="catalog-card" id="{{ product.slug }}">
+          <div class="catalog-card-img-wrapper">
+            {% if product.image %}
+              <img src="{{ product.image.url }}" alt="{{ product.name }}" class="catalog-card-img">
+            {% else %}
+              <div class="catalog-card-placeholder">🍵</div>
+            {% endif %}
+          </div>
+          <div class="catalog-card-body">
+            <span class="brand-tag">AMS Tea Traders</span>
+            <h3 class="product-title">{{ product.name }}</h3>
+            <div class="product-stars">★★★★★</div>
+            <p class="product-desc">{{ product.short_description|default:product.description|truncatewords:15 }}</p>
+            <div class="catalog-card-footer">
+              <a href="{% url 'contact' %}" class="btn btn-enquire">Enquire</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty-state">
+        <div class="icon">🍃</div>
+        <h3>No products found</h3>
+        <p>Please check back soon, or add products from the Django admin panel.</p>
+      </div>
+      {% endif %}
+    </div>
+
+  </div>
+  
+  <!-- Reviews / Testimonials Slider Section -->
+  <div class="container reviews-section">
+    <h2 class="carousel-title">Customers Speak</h2>
+    
+    <!-- Google Review Summary / Reporting Overview -->
+    <div class="review-summary-card">
+      <div class="summary-left">
+        <div class="overall-rating">4.5</div>
+        <div class="summary-stars">★★★★★</div>
+        <div class="total-reviews">12 Google reviews</div>
+      </div>
+      
+      <div class="summary-right">
+        <!-- 5 stars -->
+        <div class="rating-bar-row">
+          <span class="star-label">5 star</span>
+          <div class="rating-bar-bg">
+            <div class="rating-bar-fill" style="width: 83.3%;"></div>
+          </div>
+        </div>
+        <!-- 4 stars -->
+        <div class="rating-bar-row">
+          <span class="star-label">4 star</span>
+          <div class="rating-bar-bg">
+            <div class="rating-bar-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+        <!-- 3 stars -->
+        <div class="rating-bar-row">
+          <span class="star-label">3 star</span>
+          <div class="rating-bar-bg">
+            <div class="rating-bar-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+        <!-- 2 stars -->
+        <div class="rating-bar-row">
+          <span class="star-label">2 star</span>
+          <div class="rating-bar-bg">
+            <div class="rating-bar-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+        <!-- 1 star -->
+        <div class="rating-bar-row">
+          <span class="star-label">1 star</span>
+          <div class="rating-bar-bg">
+            <div class="rating-bar-fill" style="width: 8.3%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="reviews-grid">
+      <!-- Card 1 -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <h4>SS INFOTECH</h4>
+            <span>Google Reviewer</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <p class="review-text">
+          "I purchased their tea powder for the first time. The taste, fragrance, and thickness are of super quality."
+        </p>
+        <span class="quote-icon">“</span>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <h4>Karthick M</h4>
+            <span>Google Reviewer</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <p class="review-text">
+          "Nice taste... Quality and taste are very good."
+        </p>
+        <span class="quote-icon">“</span>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <h4>Chandra Kanth</h4>
+            <span>Google Reviewer</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <p class="review-text">
+          "Tea is very strong and has a good aroma..."
+        </p>
+        <span class="quote-icon">“</span>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <h4>Deenath Moh</h4>
+            <span>Google Reviewer</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <p class="review-text">
+          "Very quality tea."
+        </p>
+        <span class="quote-icon">“</span>
+      </div>
+
+      <!-- User Submitted Reviews -->
+      {% for r in user_reviews %}
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <h4>{{ r.name }}</h4>
+            <span>Verified Customer</span>
+          </div>
+          <div class="review-stars">{% if r.rating == 5 %}★★★★★{% elif r.rating == 4 %}★★★★{% elif r.rating == 3 %}★★★{% elif r.rating == 2 %}★★{% else %}★{% endif %}</div>
+        </div>
+        <p class="review-text">
+          "{{ r.comment }}"
+        </p>
+        <span class="quote-icon">“</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Write a Review Form -->
+  <div class="container review-form-container" style="margin-top: 50px;">
+    <div style="max-width: 600px; margin: 0 auto; background: var(--white); padding: 36px; border-radius: var(--radius); box-shadow: var(--shadow); border-top: 4px solid var(--green-primary);">
+      <h3 style="color: var(--green-dark); font-size: 1.4rem; margin-bottom: 8px; text-align: center; font-weight: 700;">Share Your Experience</h3>
+      <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Submit a review directly to our team.</p>
+      
+      <form method="post" action="{% url 'products' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Your Name</label>
+          {{ review_form.name }}
+        </div>
+        <div class="form-group">
+          <label>Rating</label>
+          {{ review_form.rating }}
+        </div>
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label>Review Comment</label>
+          {{ review_form.comment }}
+        </div>
+        <div style="text-align: center;">
+          <button type="submit" class="btn btn-primary" style="padding: 12px 30px; font-size: 1rem; width: 100%;">Submit Review</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

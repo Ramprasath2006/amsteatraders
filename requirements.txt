@@ -1,0 +1,9 @@
+Django>=5.0,<7.0
+pillow>=10.0
+asgiref
+sqlparse
+tzdata
+gunicorn
+whitenoise
+dj-database-url
+psycopg2-binary

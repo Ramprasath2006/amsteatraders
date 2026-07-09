@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ page_title }} | A M S Tea Traders{% endblock %}</title>
+  <meta name="description" content="A M S Tea Traders - Premium quality tea sourcing, wholesale and retail distribution.">
+  <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  {% include 'partials/header.html' %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include 'partials/footer.html' %}
+
+  <script src="{% static 'core/js/script.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

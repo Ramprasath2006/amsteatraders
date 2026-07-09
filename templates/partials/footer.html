@@ -1,0 +1,82 @@
+{% load static %}
+<footer class="site-footer">
+  <div class="footer-grid">
+
+    <!-- Column 1: Company -->
+    <div class="footer-col">
+      <div class="footer-brand">
+        <div class="brand-logo" style="background: transparent;">
+          <img src="{% static 'core/images/logo.png' %}" alt="A M S Tea Traders Logo"
+            style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <span>A M S Tea Traders</span>
+      </div>
+      <p>
+        A M S Tea Traders is a trusted name in premium tea sourcing and
+        distribution, delivering handpicked, quality-assured tea leaves
+        from garden to cup since our founding. We blend tradition with
+        consistency to serve homes and businesses alike.
+      </p>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">x</a>
+        <a href="https://wa.me/910000000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">wa</a>
+      </div>
+    </div>
+
+    <!-- Column 2: Quick Links -->
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'products' %}">Product &amp; Review</a></li>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Products -->
+    <div class="footer-col">
+      <h4>Our Products</h4>
+      <ul>
+        <li><a href="{% url 'products' %}?category=dust-tea">Dust Tea</a></li>
+        <li><a href="{% url 'products' %}?category=hotel-blend">Hotel Blend</a></li>
+        <li><a href="{% url 'products' %}?category=premium-tea-dust">Premium Tea Dust</a></li>
+        <li><a href="{% url 'products' %}?category=bop">BOP</a></li>
+        <li><a href="{% url 'products' %}?category=leaf-tea">Leaf Tea</a></li>
+        <li><a href="{% url 'products' %}">View All Products</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 4: Contact Info -->
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <div class="footer-contact-item">
+        <span class="icon">📍</span>
+        <span>Ramachandra Rd, Pomarpet, R.S. Puram, Coimbatore, Tamil Nadu 641002</span>
+      </div>
+      <div class="footer-contact-item">
+        <span class="icon">📞</span>
+        <span>+91 7010839905</span>
+      </div>
+      <div class="footer-contact-item">
+        <span class="icon">✉️</span>
+        <span>info@amsteatraders.com</span>
+      </div>
+      <div class="footer-contact-item">
+        <span class="icon">🕒</span>
+        <span>Mon - Sat: 9:00 AM - 8:30 PM</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; <span id="footer-year">2026</span> A M S Tea Traders. All Rights Reserved.</p>
+    <div class="links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms &amp; Conditions</a>
+    </div>
+  </div>
+</footer>

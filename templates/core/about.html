@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero"
+  style="background-image: linear-gradient(rgba(15, 61, 36, 0.75), rgba(15, 61, 36, 0.75)), url('{% static "core/images/hero-bg.png" %}'); padding: 60px 20px;">
+  <div class="container">
+    <h1>About Us</h1>
+    <p>Rooted in tradition, driven by quality — our journey from garden to cup.</p>
+  </div>
+</section>
+
+<!-- Who We Are & Our Vision Section -->
+<section class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <h2 style="color: var(--green-dark); font-size: 2rem; margin-bottom: 16px; font-weight: 800;">Who We Are</h2>
+        <p style="margin-bottom: 20px; color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">
+          Based in the vibrant hub of Coimbatore, Tamil Nadu, A M S Tea Traders is a trusted manufacturer, blender, and wholesale supplier of premium tea products. We specialize in sourcing high-grade tea leaves directly from India’s most celebrated tea-growing terrains, carefully processing them to cater to both commercial businesses and household kitchens across the region.
+        </p>
+        <div style="background: var(--green-light); padding: 30px; border-radius: var(--radius); border-left: 5px solid var(--green-primary); box-shadow: var(--shadow);">
+          <h3 style="color: var(--green-dark); font-size: 1.3rem; margin-bottom: 10px; font-weight: 700;">Our Vision</h3>
+          <p style="color: var(--green-primary); font-size: 1rem; font-style: italic; line-height: 1.6; font-weight: 500;">
+            "To bridge the gap between India’s finest pristine tea gardens and everyday consumers by delivering uncompromised quality, exceptional strength, and authentic regional flavors in every single cup."
+          </p>
+        </div>
+      </div>
+      <div>
+        <img src="{% static 'core/images/about-team.jpg' %}" alt="A M S Tea Traders Team" style="width: 100%; height: auto; border-radius: var(--radius); box-shadow: var(--shadow); object-fit: cover;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Sourcing & Mastery Section -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-title">
+      <h2>Our Sourcing &amp; Mastery</h2>
+      <p>Sourcing directly from India's most celebrated terrains with master processing.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-item">
+        <div style="font-size: 2.2rem; margin-bottom: 14px;">🍃</div>
+        <h4>The Assam Heritage</h4>
+        <p>We procure rich, robust, and malty Assam tea leaves, chosen specifically for their deep color and invigorating, full-bodied strength.</p>
+      </div>
+      <div class="value-item">
+        <div style="font-size: 2.2rem; margin-bottom: 14px;">🏔️</div>
+        <h4>The Nilgiri Freshness</h4>
+        <p>Located near the mist-covered Western Ghats, we source fresh, fragrant South Indian leaf and dust tea varieties known for their brisk flavor and distinct aroma.</p>
+      </div>
+      <div class="value-item">
+        <div style="font-size: 2.2rem; margin-bottom: 14px;">⚙️</div>
+        <h4>CTC Processing Excellence</h4>
+        <p>Utilizing advanced Crush, Tear, Curl (CTC) manufacturing methods, we ensure our tea grains release maximum flavor, uniform color, and optimum consistency when brewed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Core Offerings Section -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Our Core Offerings</h2>
+      <p>Designed to cater to both professional catering and premium household needs.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-item" style="border-top-color: var(--green-mid);">
+        <div style="font-size: 2.2rem; margin-bottom: 14px;">🍵</div>
+        <h4>Commercial Dust Tea</h4>
+        <p>Formulated with an intense color and quick-brewing profile, making it the top choice for local tea stalls, hotels, and catering businesses.</p>
+      </div>
+      <div class="value-item" style="border-top-color: var(--green-mid);">
+        <div style="font-size: 2.2rem; margin-bottom: 14px;">🌿</div>
+        <h4>Premium Leaf Blends</h4>
+        <p>Balanced combinations of leaf grades perfect for a smooth, premium household tea experience.</p>
+      </div>
+      <div class="value-item" style="border-top-color: var(--green-mid);">
+        <div style="font-size: 2.2rem; margin-bottom: 14px;">📦</div>
+        <h4>Flexible Bulk Wholesale</h4>
+        <p>Packaged securely in retail sizes (250g, 500g, 1kg bags) as well as heavy industrial sacks to fulfill large-scale institutional demands seamlessly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Partners Choose Us Section -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-title">
+      <h2>Why Partners Choose Us</h2>
+      <p>Decades of trust, quality control, and reliable farm-to-cup distribution.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-item" style="border-top-color: var(--green-dark);">
+        <div style="font-size: 2.2rem; margin-bottom: 14px;">🚜</div>
+        <h4>Direct Farm Sourcing</h4>
+        <p>Eliminating excessive middlemen to offer competitive, transparent pricing directly from the plantation source.</p>
+      </div>
+      <div class="value-item" style="border-top-color: var(--green-dark);">
+        <div style="font-size: 2.2rem; margin-bottom: 14px;">🔬</div>
+        <h4>Rigorous Quality Control</h4>
+        <p>Every single batch undergoes thorough grading and tasting tests to ensure absolute consistency in flavor, texture, and aroma.</p>
+      </div>
+      <div class="value-item" style="border-top-color: var(--green-dark);">
+        <div style="font-size: 2.2rem; margin-bottom: 14px;">🚚</div>
+        <h4>Reliable Supply Chain</h4>
+        <p>Efficient logistical planning backed by a seamless digital distribution network ensures fresh stock arrives on time, every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

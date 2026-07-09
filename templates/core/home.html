@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="hero-carousel-section">
+  <div class="hero-carousel">
+    
+    <!-- Slide 1 -->
+    <div class="hero-slide active" style="background-image: url('{% static "core/images/home-slide-1.jpg" %}');">
+      <div class="container hero-content" style="height: 100%; display: flex; align-items: flex-end; padding-bottom: 60px;">
+        <div class="hero-buttons">
+          <a href="{% url 'products' %}" class="btn btn-primary">Explore Products</a>
+          <a href="{% url 'contact' %}" class="btn btn-outline" style="border-color: var(--white); color: var(--white); background: rgba(15, 61, 36, 0.45);">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="hero-slide" style="background-image: url('{% static "core/images/home-slide-2.jpg" %}');">
+      <div class="container hero-content" style="height: 100%; display: flex; align-items: flex-end; padding-bottom: 60px;">
+        <div class="hero-buttons">
+          <a href="{% url 'products' %}" class="btn btn-primary">Explore Products</a>
+          <a href="{% url 'contact' %}" class="btn btn-outline" style="border-color: var(--white); color: var(--white); background: rgba(15, 61, 36, 0.45);">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="hero-slide" style="background-image: url('{% static "core/images/home-slide-3.jpg" %}');">
+      <div class="container hero-content" style="height: 100%; display: flex; align-items: flex-end; padding-bottom: 60px;">
+        <div class="hero-buttons">
+          <a href="{% url 'products' %}" class="btn btn-primary">Explore Products</a>
+          <a href="{% url 'contact' %}" class="btn btn-outline" style="border-color: var(--white); color: var(--white); background: rgba(15, 61, 36, 0.45);">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control prev" onclick="moveHomeSlide(-1)" aria-label="Previous slide">&#8249;</button>
+    <button class="carousel-control next" onclick="moveHomeSlide(1)" aria-label="Next slide">&#8250;</button>
+
+    <!-- Carousel Indicators -->
+    <div class="carousel-dots">
+      <span class="dot active" onclick="setHomeSlide(0)"></span>
+      <span class="dot" onclick="setHomeSlide(1)"></span>
+      <span class="dot" onclick="setHomeSlide(2)"></span>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Shop by Category</h2>
+      <p>Discover our range of teas, carefully sourced and graded for quality.</p>
+    </div>
+
+    {% if categories %}
+    <div class="category-grid">
+      {% for category in categories %}
+      <div class="card">
+        {% if category.get_image_url %}
+          <img src="{{ category.get_image_url }}" alt="{{ category.name }}" class="card-img">
+        {% else %}
+          <div class="card-img-placeholder">🍵</div>
+        {% endif %}
+        <div class="card-body">
+          <h3>{{ category.name }}</h3>
+          <p>{{ category.description|default:"Premium quality, freshly sourced." }}</p>
+          <div class="card-footer" style="justify-content: flex-end;">
+            <a href="{% url 'products' %}?category={{ category.slug }}" class="btn btn-primary" style="padding:8px 18px; font-size:0.85rem;">View Products</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p style="text-align:center; color: var(--text-muted);">Categories will appear here once added in the admin panel.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-title">
+      <h2>Featured Products</h2>
+      <p>A selection of our most loved and best-selling teas.</p>
+    </div>
+
+    {% if featured_products %}
+    <div class="grid">
+      {% for product in featured_products %}
+      <div class="card" id="{{ product.slug }}">
+        {% if product.image %}
+          <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img">
+        {% else %}
+          <div class="card-img-placeholder">🍃</div>
+        {% endif %}
+        <div class="card-body">
+          {% if product.is_featured %}<span class="badge">Featured</span>{% endif %}
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.short_description|default:product.description|truncatewords:15 }}</p>
+          <div class="card-footer" style="justify-content: flex-end;">
+            <a href="{% url 'contact' %}" class="btn btn-primary" style="padding:8px 18px; font-size:0.85rem;">Enquire</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p style="text-align:center; color: var(--text-muted);">Featured products will appear here once added in the admin panel.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-box"><h3>25+</h3><p>Years of Experience</p></div>
+      <div class="stat-box"><h3>500+</h3><p>Wholesale Clients</p></div>
+      <div class="stat-box"><h3>50+</h3><p>Tea Varieties</p></div>
+      <div class="stat-box"><h3>100%</h3><p>Quality Assured</p></div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  let currentHomeSlide = 0;
+  const homeSlides = document.querySelectorAll('.hero-slide');
+  const homeDots = document.querySelectorAll('.carousel-dots .dot');
+
+  function showHomeSlide(index) {
+    if (homeSlides.length === 0) return;
+    if (index >= homeSlides.length) {
+      currentHomeSlide = 0;
+    } else if (index < 0) {
+      currentHomeSlide = homeSlides.length - 1;
+    } else {
+      currentHomeSlide = index;
+    }
+
+    homeSlides.forEach((slide, i) => {
+      if (i === currentHomeSlide) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+
+    homeDots.forEach((dot, i) => {
+      if (i === currentHomeSlide) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  function moveHomeSlide(direction) {
+    showHomeSlide(currentHomeSlide + direction);
+    resetHomeAutoSlide();
+  }
+
+  function setHomeSlide(index) {
+    showHomeSlide(index);
+    resetHomeAutoSlide();
+  }
+
+  let homeAutoSlide = setInterval(() => {
+    moveHomeSlide(1);
+  }, 5000);
+
+  function resetHomeAutoSlide() {
+    clearInterval(homeAutoSlide);
+    homeAutoSlide = setInterval(() => {
+      moveHomeSlide(1);
+    }, 5000);
+  }
+</script>
+{% endblock %}
