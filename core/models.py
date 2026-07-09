@@ -8,6 +8,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=120, unique=True, blank=True)
     description = models.TextField(blank=True)
+    image = models.ImageField(upload_to='categories/', blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -24,6 +25,8 @@ class Category(models.Model):
 
     @property
     def get_image_url(self):
+        if self.image:
+            return self.image.url
         product_with_image = self.products.filter(is_featured=False, image__isnull=False).exclude(image='').first()
         if product_with_image and product_with_image.image:
             return product_with_image.image.url

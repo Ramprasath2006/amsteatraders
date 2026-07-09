@@ -5,33 +5,42 @@
 
 <section class="hero-carousel-section">
   <div class="hero-carousel">
-    
+
     <!-- Slide 1 -->
     <div class="hero-slide active" style="background-image: url('{% static "core/images/home-slide-1.jpg" %}');">
-      <div class="container hero-content" style="height: 100%; display: flex; align-items: flex-end; padding-bottom: 60px;">
+      <div class="container hero-content"
+        style="height: 100%; display: flex; align-items: flex-end; padding-bottom: 60px;">
         <div class="hero-buttons">
           <a href="{% url 'products' %}" class="btn btn-primary">Explore Products</a>
-          <a href="{% url 'contact' %}" class="btn btn-outline" style="border-color: var(--white); color: var(--white); background: rgba(15, 61, 36, 0.45);">Get In Touch</a>
+          <a href="{% url 'contact' %}" class="btn btn-outline"
+            style="border-color: var(--white); color: var(--white); background: rgba(15, 61, 36, 0.45);">Get In
+            Touch</a>
         </div>
       </div>
     </div>
 
     <!-- Slide 2 -->
     <div class="hero-slide" style="background-image: url('{% static "core/images/home-slide-2.jpg" %}');">
-      <div class="container hero-content" style="height: 100%; display: flex; align-items: flex-end; padding-bottom: 60px;">
+      <div class="container hero-content"
+        style="height: 100%; display: flex; align-items: flex-end; padding-bottom: 60px;">
         <div class="hero-buttons">
           <a href="{% url 'products' %}" class="btn btn-primary">Explore Products</a>
-          <a href="{% url 'contact' %}" class="btn btn-outline" style="border-color: var(--white); color: var(--white); background: rgba(15, 61, 36, 0.45);">Get In Touch</a>
+          <a href="{% url 'contact' %}" class="btn btn-outline"
+            style="border-color: var(--white); color: var(--white); background: rgba(15, 61, 36, 0.45);">Get In
+            Touch</a>
         </div>
       </div>
     </div>
 
     <!-- Slide 3 -->
     <div class="hero-slide" style="background-image: url('{% static "core/images/home-slide-3.jpg" %}');">
-      <div class="container hero-content" style="height: 100%; display: flex; align-items: flex-end; padding-bottom: 60px;">
+      <div class="container hero-content"
+        style="height: 100%; display: flex; align-items: flex-end; padding-bottom: 60px;">
         <div class="hero-buttons">
           <a href="{% url 'products' %}" class="btn btn-primary">Explore Products</a>
-          <a href="{% url 'contact' %}" class="btn btn-outline" style="border-color: var(--white); color: var(--white); background: rgba(15, 61, 36, 0.45);">Get In Touch</a>
+          <a href="{% url 'contact' %}" class="btn btn-outline"
+            style="border-color: var(--white); color: var(--white); background: rgba(15, 61, 36, 0.45);">Get In
+            Touch</a>
         </div>
       </div>
     </div>
@@ -62,22 +71,24 @@
       {% for category in categories %}
       <div class="card">
         {% if category.get_image_url %}
-          <img src="{{ category.get_image_url }}" alt="{{ category.name }}" class="card-img">
+        <img src="{{ category.get_image_url }}" alt="{{ category.name }}" class="card-img">
         {% else %}
-          <div class="card-img-placeholder">🍵</div>
+        <div class="card-img-placeholder">🍵</div>
         {% endif %}
         <div class="card-body">
           <h3>{{ category.name }}</h3>
           <p>{{ category.description|default:"Premium quality, freshly sourced." }}</p>
           <div class="card-footer" style="justify-content: flex-end;">
-            <a href="{% url 'products' %}?category={{ category.slug }}" class="btn btn-primary" style="padding:8px 18px; font-size:0.85rem;">View Products</a>
+            <a href="{% url 'products' %}?category={{ category.slug }}" class="btn btn-primary"
+              style="padding:8px 18px; font-size:0.85rem;">View Products</a>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
     {% else %}
-    <p style="text-align:center; color: var(--text-muted);">Categories will appear here once added in the admin panel.</p>
+    <p style="text-align:center; color: var(--text-muted);">Categories will appear here once added in the admin panel.
+    </p>
     {% endif %}
   </div>
 </section>
@@ -94,23 +105,25 @@
       {% for product in featured_products %}
       <div class="card" id="{{ product.slug }}">
         {% if product.image %}
-          <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img">
         {% else %}
-          <div class="card-img-placeholder">🍃</div>
+        <div class="card-img-placeholder">🍃</div>
         {% endif %}
         <div class="card-body">
           {% if product.is_featured %}<span class="badge">Featured</span>{% endif %}
           <h3>{{ product.name }}</h3>
           <p>{{ product.short_description|default:product.description|truncatewords:15 }}</p>
           <div class="card-footer" style="justify-content: flex-end;">
-            <a href="{% url 'contact' %}" class="btn btn-primary" style="padding:8px 18px; font-size:0.85rem;">Enquire</a>
+            <a href="{% url 'contact' %}" class="btn btn-primary"
+              style="padding:8px 18px; font-size:0.85rem;">Enquire</a>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
     {% else %}
-    <p style="text-align:center; color: var(--text-muted);">Featured products will appear here once added in the admin panel.</p>
+    <p style="text-align:center; color: var(--text-muted);">Featured products will appear here once added in the admin
+      panel.</p>
     {% endif %}
   </div>
 </section>
@@ -118,10 +131,22 @@
 <section class="section">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-box"><h3>25+</h3><p>Years of Experience</p></div>
-      <div class="stat-box"><h3>500+</h3><p>Wholesale Clients</p></div>
-      <div class="stat-box"><h3>50+</h3><p>Tea Varieties</p></div>
-      <div class="stat-box"><h3>100%</h3><p>Quality Assured</p></div>
+      <div class="stat-box">
+        <h3>51+</h3>
+        <p>Years of Experience</p>
+      </div>
+      <div class="stat-box">
+        <h3>500+</h3>
+        <p>Wholesale Clients</p>
+      </div>
+      <div class="stat-box">
+        <h3>10+</h3>
+        <p>Tea Varieties</p>
+      </div>
+      <div class="stat-box">
+        <h3>100%</h3>
+        <p>Quality Assured</p>
+      </div>
     </div>
   </div>
 </section>
