@@ -60,27 +60,16 @@ def about(request):
 
 
 def contact(request):
-    import urllib.parse
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            inquiry = form.save()
-            
-            # Construct the WhatsApp API message URL
-            whatsapp_number = "919994256650"
-            message_text = (
-                f"Hello AMS Tea Traders,\n\n"
-                f"I would like to send a message:\n"
-                f"Name: {inquiry.name}\n"
-                f"Email: {inquiry.email}\n"
-                f"Phone: {inquiry.phone or 'N/A'}\n"
-                f"Subject: {inquiry.subject or 'N/A'}\n"
-                f"Message: {inquiry.message}"
+            form.save()
+            messages.success(
+                request,
+                "Thank you for reaching out! Your message has been received. "
+                "Our team will get back to you shortly."
             )
-            encoded_text = urllib.parse.quote(message_text)
-            whatsapp_url = f"https://wa.me/{whatsapp_number}?text={encoded_text}"
-            
-            return redirect(whatsapp_url)
+            return redirect('contact')
         else:
             messages.error(request, "Please correct the errors below and try again.")
     else:

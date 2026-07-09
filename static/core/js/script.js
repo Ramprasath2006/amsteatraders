@@ -64,6 +64,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (hasError) {
         e.preventDefault();
+      } else {
+        e.preventDefault();
+        
+        const nameVal = name ? name.value.trim() : '';
+        const emailVal = email ? email.value.trim() : '';
+        const phone = contactForm.querySelector('#id_phone');
+        const phoneVal = phone ? phone.value.trim() : '';
+        const subject = contactForm.querySelector('#id_subject');
+        const subjectVal = subject ? subject.value.trim() : '';
+        const messageVal = message ? message.value.trim() : '';
+        
+        const whatsappNumber = "919994256650";
+        const whatsappText = `Hello AMS Tea Traders,\n\nI would like to send a message:\nName: ${nameVal}\nEmail: ${emailVal}\nPhone: ${phoneVal || 'N/A'}\nSubject: ${subjectVal || 'N/A'}\nMessage: ${messageVal}`;
+        
+        const encodedText = encodeURIComponent(whatsappText);
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+        
+        window.open(whatsappUrl, '_blank');
+        contactForm.reset();
       }
     });
   }
